@@ -1,26 +1,14 @@
- const express = require('express');
+const express = require('express');
 const app = express();
-const port = process.env.PORT || 3000;
 
-app.get('/', (req, res) => {
-    res.send('Live');
-});
-
-app.get('/process', async (req, res) => {
-    const youtubeUrl = req.query.url;
+app.get('/process', (req, res) => {
+    const userUrl = req.query.url;
+    console.log("Received URL: ", userUrl);
     
-    if (!youtubeUrl) {
-        return res.status(400).send('Error');
-    }
-
-    try {
-        const result = `URL: ${youtubeUrl}`;
-        res.send(result);
-    } catch (error) {
-        res.status(500).send('Error');
-    }
+    res.send("Received successfully: " + userUrl);
 });
 
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
